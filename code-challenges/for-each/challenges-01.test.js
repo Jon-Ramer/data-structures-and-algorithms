@@ -114,7 +114,10 @@ This anonymous function should accept up to three arguments: the element, the in
 // };
 
 const removeWithAnon = (arr) => {
-  // Solution code here...
+  arr.forEach(function(currentValue) {
+    removeOne(currentValue, arr)
+  })
+  return arr;  
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -134,8 +137,12 @@ The inventory is formatted like this:
 This function should use forEach to populate your grocery list based on the store's inventory. If the item is available, add it to your list. Return the final list.
 ------------------------------------------------------------------------------------------------ */
 
-const createList = (availableItems) => {
-  // Solution code here...
+const createList = (available_items) => {
+  let store_inventory = []
+    available_items.forEach(function(item){
+    if(item.available == true) store_inventory.push(item.name)
+  })
+return store_inventory;
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -153,7 +160,12 @@ Return the resulting output array.
 ------------------------------------------------------------------------------------------------ */
 
 const fizzbuzz = (arr) => {
-  // Solution code here...
+  arr.forEach(function(num, idx) {
+    if (arr[idx] % 15 === 0) {arr[idx] = 'Fizz Buzz'};
+    if (arr[idx] % 3 === 0) {arr[idx] = 'Fizz'};
+    if (arr[idx] % 5 === 0) {arr[idx] = 'Buzz'};
+  })
+return arr;
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -194,14 +206,14 @@ describe('Testing challenge 4', () => {
   });
 });
 
-xdescribe('Testing challenge 5', () => {
+describe('Testing challenge 5', () => {
   test('It should remove three elements from the array', () => {
     expect(removeWithAnon([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])).toStrictEqual([1, 2, 3, 4, 5, 6, 7]);
     expect(removeWithAnon([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]).length).toStrictEqual(7);
   });
 });
 
-xdescribe('Testing challenge 6', () => {
+describe('Testing challenge 6', () => {
   const inventory = [{ name: 'apples', available: true }, { name: 'pears', available: true }, { name: 'oranges', available: false }, { name: 'bananas', available: true }, { name: 'blueberries', available: false }];
 
   test('It should only add the available items to the list', () => {
@@ -210,7 +222,7 @@ xdescribe('Testing challenge 6', () => {
   });
 });
 
-xdescribe('Testing challenge 7', () => {
+describe('Testing challenge 7', () => {
   const inputs = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16];
 
   test('It should print out messages or numbers', () => {
