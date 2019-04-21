@@ -19,8 +19,8 @@ let str = "The rain in Spain falls mainly in the plain";
 ------------------------------------------------------------------------------------------------ */
 
 const isNum = (input) => {
-  let regex = /[0-9]/
-  regex.test(input);
+  let regex = /[0-9]/;
+  return regex.test(input);
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -32,8 +32,9 @@ Return an array containing all the matches.
 ------------------------------------------------------------------------------------------------ */
 
 const isCapitalized = (str) => {
-    let regex = /[A-Z]/
-    regex.test(str);
+    let regex = /[A-Z][a-zA-Z]*/g;
+    let caps = str.match(regex);
+  return caps;
   };
 
 /* ------------------------------------------------------------------------------------------------
@@ -44,12 +45,10 @@ Write a function named citiesAtoJ that takes in an array of city names and uses 
 
 const citiesAtoJ = (arr) => {
     let capital_result = [];
-    let regex = /^[A-J]/
-    for (var i = 0; i < arr.length; i++) {
-        if (regex.test(str) === true) {
-            capital_result.push(arr[i]);
-        }             
-    }
+    let regex = /^[A-J]/;
+    arr.forEach(check => {
+      if(regex.test(check)) capital_result.push(check);
+    })
     return capital_result;
   };
 
@@ -66,7 +65,8 @@ Do not use the vertical bar (pipe) in your pattern.
 ------------------------------------------------------------------------------------------------ */
 
 const matchMonth = (input) => {
-  // Solution code here...
+  let month = /^[Oo]ct(ober)?$/;
+  return month.test(input);
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -80,7 +80,8 @@ The expected output of "Hello, and have a wonderful day!" is ["and ", "have ", "
 ------------------------------------------------------------------------------------------------ */
 
 const noPunctuation = str => {
-  // Solution code here...
+  let spaces = /\w+\s/g;
+  return str.match(spaces)
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -96,7 +97,7 @@ For example, 'Welcome to Code 301!' will return 'W_lc_m_ t_ C_d_ 301!'.
 ------------------------------------------------------------------------------------------------ */
 
 let hangman = (str) => {
-  // Solution code here...
+  return str.replace(/[a|e|i|o|u]/g, '_');
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -162,7 +163,7 @@ describe('Testing challenge 3', () => {
   });
 });
 
-xdescribe('Testing challenge 4', () => {
+describe('Testing challenge 4', () => {
   test('It should match any of the acceptable inputs', () => {
     expect(matchMonth('Oct')).toBeTruthy();
     expect(matchMonth('oct')).toBeTruthy();
@@ -180,7 +181,7 @@ xdescribe('Testing challenge 4', () => {
   });
 });
 
-xdescribe('Testing challenge 5', () => {
+describe('Testing challenge 5', () => {
   const lorem = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras lacinia vel massa sed egestas. Nunc faucibus iaculis elit, a scelerisque enim condimentum sed. Aenean ac scelerisque sem, et pharetra diam.';
 
   test('It should only return words that are immediately followed by a space', () => {
@@ -193,7 +194,7 @@ xdescribe('Testing challenge 5', () => {
   });
 });
 
-xdescribe('Testing challenge 6', () => {
+describe('Testing challenge 6', () => {
   let startString = 'This is a regex challenge. We are trying to create a hangman phrase where all of the vowels are missing!';
 
   test('It should remove the vowels from the hangman string and replace them with underscores', () => {
