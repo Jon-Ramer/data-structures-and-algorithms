@@ -72,18 +72,7 @@ let characters = [
 ];
 
 const totalCharacters = (arr) => {
-  let num_chars = 0;
-  for (let i = 0; i < characters.length; i++) {
-      console.log("name: " + i + characters[i].name);
-      console.log("spouse: " + characters[i].spouse);
-    if (characters[i].name != "") { num_chars++ };
-    if (characters[i].spouse != null) { num_chars++ };
-    let values = Object.values(characters[i].children);
-      console.log(values);
-    if (values.length > 0) { num_chars = num_chars + values.length };
-  }
-  console.log(num_chars)
-  return num_chars;
+    return Object.keys(arr).length;
 };
 
 /*------------------------------------------------------------------------------------------------
@@ -113,7 +102,13 @@ hasChildrenValues(characters, 'Eddard') will return false
 ------------------------------------------------------------------------------------------------ */
 
 const hasChildrenValues = (arr, character) => {
-  // Solution code here...
+    let num_children = 0;
+    Object.values(arr).forEach(person => {
+      if(person.name === character) {
+        num_children = person.children.length > 0 ? true : false;
+      }
+    })
+    return num_children;
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -125,7 +120,15 @@ The input and output of this function are the same as the input and output from 
 ------------------------------------------------------------------------------------------------ */
 
 const hasChildrenEntries = (arr, character) => {
-  // Solution code here...
+    let num_children = 0;
+    Object.entries(arr).forEach(item => {
+      item.forEach(person => {
+        if(person.name === character) {
+          num_children = person.children.length > 0 ? true : false;
+        }
+      })
+    })
+    return num_children;
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -198,7 +201,7 @@ describe('Testing challenge 3', () => {
   });
 });
 
-xdescribe('Testing challenge 4', () => {
+describe('Testing challenge 4', () => {
   test('It should return true for characters that have children', () => {
     expect(hasChildrenValues(characters, 'Daenarys')).toBeTruthy();
   });
@@ -208,7 +211,7 @@ xdescribe('Testing challenge 4', () => {
   });
 });
 
-xdescribe('Testing challenge 5', () => {
+describe('Testing challenge 5', () => {
   test('It should return true for characters that have children', () => {
     expect(hasChildrenEntries(characters, 'Eddard')).toBeTruthy();
   });
