@@ -6,20 +6,11 @@ CHALLENGE 1
 Write a function named countNumberOfElements that, given an array as input, uses reduce to count the number of elements in the array.
 
 Note: You may not use the array's built-in length property.
-let numbers = [1,2,3,4];
-let sum = numbers.reduce( function(accumulator,value,idx) {
-  accumulator = accumulator + value;
-  return accumulator;
-}, 0);
 
 ------------------------------------------------------------------------------------------------ */
 
 const countNumberOfElements = (arr) => {
-  let num = 0;
-  let sum = arr.reduce( function (num, idx) {
-      num = num + 1;
-      return num;
-  }, 0);
+  let num = arr.reduce(count => count + 1, 0);
   return num;
 };
 
@@ -80,14 +71,10 @@ let starWarsData = [{
 }];
 
 const returnNames = (arr) => {
-    let make_array = arr.split('');
-    let result = [];
-    make_array.reduce((a,b) => {
-      result.unshift(b);
-      return a;
-    }, 0);
-    result = result.join('');
-    return result;
+  return arr.reduce((count, current) => {
+    count.push(current.name);
+    return count;
+  }, [] );
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -99,7 +86,7 @@ Note: You must use reduce for this challenge. You may not use the built-in .reve
 ------------------------------------------------------------------------------------------------ */
 
 const reversedString = (arr) => {
-  // Solution code here...
+  return arr.split('').reduce((count, current) => current + count, '');
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -152,7 +139,9 @@ const characters = [
 ];
 
 const countNumberOfChildren = (arr) => {
-  // Solution code here...
+  return arr.reduce((count, current) => {
+    return current.children ? count + current.children.length : count;
+  }, 0);
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -164,13 +153,13 @@ Hint: The accumulator should begin as { count: 0, sum: 0 }
 ------------------------------------------------------------------------------------------------ */
 
 const calculateAverage = (arr) => {
-  let count = 0;
-  let sum = [];
-	sum = arr.reduce((a,b) => {
-		count++;
-		return a + b;
-	}, 0);
-	let avg = sum/count;
+	let avg_count = arr.reduce((a,b) => {
+    return {
+    count: a.count + 1,
+		sum: a.sum + b,
+	};
+}, { count: 0, sum: 0 });
+  let avg = avg_count.sum / avg_count.count;
 	return avg;
 };
 
@@ -182,23 +171,23 @@ Write a function named countPrimeNumbers that, given an array elements as input,
 You are welcome to use the provided isPrime function.
 ------------------------------------------------------------------------------------------------ */
 
-const isPrime = (value) => {
-  for (let i = 2; i < value; i++) {
-    if (value % i === 0) {
-      return false;
-    }
-  }
-  return value > 1;
-};
+// const isPrime = (value) => {
+//   for (let i = 2; i < value; i++) {
+//     if (value % i === 0) {
+//       return false;
+//     }
+//   }
+//   return value > 1;
+// };
 
-const countPrimeNumbers = (arr) => {
-  return arr.reduce((a,b) => {
-		if(isPrime(b)){
-			return a + 1;
-		}
-		return a;
-	}, 0);
-};
+// const countPrimeNumbers = (arr) => {
+//   return arr.reduce((a,b) => {
+// 		if(isPrime(b)){
+// 			return a + 1;
+// 		}
+// 		return a;
+// 	}, 0);
+// };
 
 /* ------------------------------------------------------------------------------------------------
 CHALLENGE 7 - Stretch Goal
@@ -280,19 +269,19 @@ describe('Testing challenge 2', () => {
   });
 });
 
-xdescribe('Testing challenge 3', () => {
+describe('Testing challenge 3', () => {
   test('It should return the string with the characters in reverse order', () => {
     expect(reversedString('Code 301')).toStrictEqual('103 edoC');
   });
 });
 
-xdescribe('Testing challenge 4', () => {
+describe('Testing challenge 4', () => {
   test('It should return the total number of children', () => {
     expect(countNumberOfChildren(characters)).toStrictEqual(14);
   });
 });
 
-xdescribe('Testing challenge 5', () => {
+describe('Testing challenge 5', () => {
   test('It should return the average of the numbers in the array', () => {
     expect(calculateAverage([18, 290, 37, 4, 55, 16, 7, 85 ])).toStrictEqual(64);
   });
