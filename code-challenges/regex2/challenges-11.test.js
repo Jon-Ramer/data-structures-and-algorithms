@@ -30,10 +30,10 @@ Note: if you ever need to validate an email using a regex in practice, the Inter
 ------------------------------------------------------------------------------------------------ */
 
 const validateEmail = (email) => {
+  let t_f = false;
   let regex_pattern = /^[a-zA-Z0-9]+\.?[a-zA-Z0-9]+?@[a-zA-Z0-9]+.(com|net|org)$/;
-  let t_or_f = false;
-  t_or_f = regex_pattern.test(email);
-  return t_or_f;
+  t_f = regex_pattern.test(email);
+  return t_f;
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -58,10 +58,10 @@ Return either true or false.
 ------------------------------------------------------------------------------------------------ */
 
 const validatePhoneNumber = (phoneNumber) => {
+  let t_f = false;
   let regex_pattern = /^(\(\d{3}\)|\d{3})[- ]?\d{3}[- ]?\d{4}$/;
-  let t_or_f = false;
-  t_or_f = regex_pattern.test(phoneNumber);
-  return t_or_f;
+  t_f = regex_pattern.test(phoneNumber);
+  return t_f;
 };
 
 /* ------------------------------------------------------------------------------------------------
