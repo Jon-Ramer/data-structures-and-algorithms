@@ -6,17 +6,15 @@ CHALLENGE 1
 Write a function named oddValues that, given an array of integers as input, uses filter to return an array containing only the odd integers.
 
 For example, oddValues([1,2,3]) returns [1,3].
-let numbers = [2,3,4,5];
-  
-  let evens = numbers.filter( function(n,i) {
-    return !(n % 2);
-  });
 ------------------------------------------------------------------------------------------------ */
 
 const oddValues = (arr) => {
-  let odds = numbers.filter( function(n,i) {
-      return !((n+1) % 2);
-});
+<<<<<<< HEAD
+      return arr.filter(x => x % 2 === 1);
+=======
+  return arr.filter(x => x % 2 === 1);
+>>>>>>> 98e1ed155bec3168ed766f7e305e24cda3b5f19a
+};
 
 /* ------------------------------------------------------------------------------------------------
 CHALLENGE 2
@@ -28,11 +26,17 @@ The callback function to filter should include or utilize a regular expression p
 For example, filterStringsWithVowels('gregor','hound','xyz') returns ['gregor', 'hound'].
 ------------------------------------------------------------------------------------------------ */
 
+<<<<<<< HEAD
 
+const filterStringsWithVowels = (input) => {
+  const regex_pattern = /[aeiou]/;
+  return input.filter(x => regex_pattern.test(x));
+=======
 const filterStringsWithVowels = (arr) => {
-  // Solution code here...
+  const regex_pattern = /[aeiou]/;
+  return arr.filter(x => regex_pattern.test(x));
+>>>>>>> 98e1ed155bec3168ed766f7e305e24cda3b5f19a
 };
-
 
 /* ------------------------------------------------------------------------------------------------
 CHALLENGE 3
@@ -43,7 +47,7 @@ For example, notInFirstArray([1,2,3], [1,2,3,4]) returns [4].
 ------------------------------------------------------------------------------------------------ */
 
 const notInFirstArray = (forbiddenValues, arr) => {
-  // Solution code here...
+  return arr.filter(x => !forbiddenValues.includes(x));
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -151,7 +155,7 @@ const characters = [
 ];
 
 const getCharactersWithoutChildren = (arr) => {
-  // Solution code here...
+  return arr.filter(x => !x.children);
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -186,7 +190,7 @@ describe('Testing challenge 1', () => {
   });
 });
 
-xdescribe('Testing challenge 2', () => {
+describe('Testing challenge 2', () => {
   test('It should return an array containing only words that have vowels', () => {
     expect(filterStringsWithVowels(['gregor','hound','xyz'])).toStrictEqual(['gregor', 'hound']);
     expect(filterStringsWithVowels(['gregor','hound','xyz']).length).toStrictEqual(2);
@@ -199,7 +203,7 @@ xdescribe('Testing challenge 2', () => {
   });
 });
 
-xdescribe('Testing challenge 3', () => {
+describe('Testing challenge 3', () => {
   const firstNums = [1, 2, 3];
   const secondNums = [1, 2, 3, 4];
 
@@ -255,7 +259,7 @@ xdescribe('Testing challenge 5', () => {
   });
 });
 
-xdescribe('Testing challenge 6', () => {
+describe('Testing challenge 6', () => {
   test('It should return an array containing characters who do not have children', () => {
     expect(getCharactersWithoutChildren(characters)).toStrictEqual([ { name: 'Sansa', spouse: 'Tyrion', house: 'Stark' }, { name: 'Jon', spouse: null, house: 'Snow' } ]);
     expect(getCharactersWithoutChildren(characters).length).toStrictEqual(2);

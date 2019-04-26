@@ -34,7 +34,7 @@ For example, [[1, 2, 3, 4, 5], [6, 7, 2, 4, 5, 7], [9, 2, 3, 6,]] returns 66.
 ------------------------------------------------------------------------------------------------ */
 
 const totalSum = (input) => {
-  // Solution code here...
+  
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -116,17 +116,38 @@ let starWarsData = [{
 }];
 
 let findMaleAndFemale = (data) => {
-  // Solution code here...
+
+  return data.filter(arr => arr.gender === 'male' || arr.gender === 'female').map(arr => arr.name).join(' and ');
+
+  // let answer = "";
+  // for (var i = 0; i < data.length; i++) {
+  //   if (data[i].gender === "male" || data[i].gender === "female") { answer = answer + data[i].name + " and ";
+  //   }
+  // };
+  // answer = answer.substring(0, (answer.length - 5));
+  // return answer;
 };
 
-/* ------------------------------------------------------------------------------------------------
+
+/* Write a function named findMaleAndFemale that returns the names of the characters whose gender is either male or female.
+
+The names should be combined into a single string with each character name separated by "and". ------------------------------------------------------------------------------------------------
 CHALLENGE 5
 
 Write a function named findShortest that, given the Star Wars data from Challenge 6, uses any combination of filter, map and reduce to return the name of the shortest character.
 ------------------------------------------------------------------------------------------------ */
 
 let findShortest = (data) => {
-  // Solution code here...
+  let shortest = 1000;
+  let num = 0;
+  for (var i = 0; i < data.length; i++) {
+    if (parseInt(data[i].height,10) < shortest) { 
+      shortest = parseInt(data[i].height,10);
+      num = i;
+    }
+    console.log("i = " + i, "num = " + num, "shortest = " + shortest);
+  };
+  return data[num].name;
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -174,14 +195,14 @@ xdescribe('Testing challenge 3', () => {
   });
 });
 
-xdescribe('Testing challenge 4', () => {
+describe('Testing challenge 4', () => {
   test('It should return only characters that are male or female', () => {
     expect(findMaleAndFemale(starWarsData)).toStrictEqual('Luke Skywalker and Darth Vader and Leia Organa');
     expect(findMaleAndFemale([{ name: 'person', gender: 'female' }, { gender: 'lol' }, { name: 'persontwo', gender: 'male' }])).toStrictEqual('person and persontwo');
   });
 });
 
-xdescribe('Testing challenge 5', () => {
+describe('Testing challenge 5', () => {
   test('It should return the name of the shortest character', () => {
     expect(findShortest(starWarsData)).toStrictEqual('R2-D2');
   });
