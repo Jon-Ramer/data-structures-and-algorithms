@@ -14,9 +14,8 @@ let numbers = [2,3,4,5];
 ------------------------------------------------------------------------------------------------ */
 
 const oddValues = (arr) => {
-  let odds = numbers.filter( function(n,i) {
-      return !((n+1) % 2);
-});
+      return arr.filter(x => x % 2 === 1);
+};
 
 /* ------------------------------------------------------------------------------------------------
 CHALLENGE 2
@@ -29,8 +28,9 @@ For example, filterStringsWithVowels('gregor','hound','xyz') returns ['gregor', 
 ------------------------------------------------------------------------------------------------ */
 
 
-const filterStringsWithVowels = (arr) => {
-  // Solution code here...
+const filterStringsWithVowels = (input) => {
+  const regex_pattern = /[aeiou]/;
+  return input.filter(x => regex_pattern.test(x));
 };
 
 
@@ -43,7 +43,7 @@ For example, notInFirstArray([1,2,3], [1,2,3,4]) returns [4].
 ------------------------------------------------------------------------------------------------ */
 
 const notInFirstArray = (forbiddenValues, arr) => {
-  // Solution code here...
+  return arr.filter(x => !forbiddenValues.includes(x));
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -151,7 +151,7 @@ const characters = [
 ];
 
 const getCharactersWithoutChildren = (arr) => {
-  // Solution code here...
+  return arr.filter(x => !x.children);
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -186,7 +186,7 @@ describe('Testing challenge 1', () => {
   });
 });
 
-xdescribe('Testing challenge 2', () => {
+describe('Testing challenge 2', () => {
   test('It should return an array containing only words that have vowels', () => {
     expect(filterStringsWithVowels(['gregor','hound','xyz'])).toStrictEqual(['gregor', 'hound']);
     expect(filterStringsWithVowels(['gregor','hound','xyz']).length).toStrictEqual(2);
@@ -199,7 +199,7 @@ xdescribe('Testing challenge 2', () => {
   });
 });
 
-xdescribe('Testing challenge 3', () => {
+describe('Testing challenge 3', () => {
   const firstNums = [1, 2, 3];
   const secondNums = [1, 2, 3, 4];
 
@@ -255,7 +255,7 @@ xdescribe('Testing challenge 5', () => {
   });
 });
 
-xdescribe('Testing challenge 6', () => {
+describe('Testing challenge 6', () => {
   test('It should return an array containing characters who do not have children', () => {
     expect(getCharactersWithoutChildren(characters)).toStrictEqual([ { name: 'Sansa', spouse: 'Tyrion', house: 'Stark' }, { name: 'Jon', spouse: null, house: 'Snow' } ]);
     expect(getCharactersWithoutChildren(characters).length).toStrictEqual(2);
