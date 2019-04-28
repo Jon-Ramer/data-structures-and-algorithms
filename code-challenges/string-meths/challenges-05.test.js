@@ -78,19 +78,15 @@ const gruffaloCrumble = {
   ]
 };
 
-
 const listFoods = (recipe) => {
   let result = [];
-  let j = 0;
-  for (let i = 0; i < 11; i++) {
-    j = recipe.ingredients[i].indexOf(" ");
-    recipe.ingredients[i] = recipe.ingredients[i].slice(j + 1);
-    j = recipe.ingredients[i].indexOf(" ");
-    result.push(recipe.ingredients[i].slice(j + 1));
-  }
+  recipe.ingredients.forEach( (ingredient) => {
+    let amount = ingredient.slice(ingredient.indexOf(' ') + 1);
+    let units = amount.slice(amount.indexOf(' ') + 1 );
+    result.push(units);
+  })
   return result;
 };
-
 
 /* ------------------------------------------------------------------------------------------------
 CHALLENGE 4
@@ -107,7 +103,6 @@ const splitFoods = (recipe) => {
     split_info = recipe.ingredients[i].split(" ");
     result.push(split_info[2]);
   }
-  
   return result;
 };
 
@@ -145,7 +140,7 @@ For example:
 ------------------------------------------------------------------------------------------------ */
 
 const removeEvenValues = (arr) => {
-  for (let i = 0; i < arr.length; i++) {
+  for (var i = 0; i < arr.length; i++) {
   if (arr[i] % 2 === 0) {
       arr.slice(i, 1);
   }
